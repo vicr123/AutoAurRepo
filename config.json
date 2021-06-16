@@ -4,7 +4,6 @@
     "repositories": [
         {
             "name": "testrepo",
-            "path": "",
             "packageRepository": "$HOME/repositories/testrepo",
             "packages": [
                 "the-libs",

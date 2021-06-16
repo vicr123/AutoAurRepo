@@ -6,7 +6,8 @@ mkdir -p $DESTDIR/usr/lib/systemd/system
 
 cp -r ../*[^dist][^pkgbuild][^.vscode]* $DESTDIR/opt/autoaurrepo
 rm $DESTDIR/opt/autoaurrepo/config.json
-ln -s /opt/autoaurrepo/index.js $DESTDIR/usr/bin/autoaurrepo
+
+cp autoaurrepo $DESTDIR/usr/bin
 
 cp ../config.json $DESTDIR/etc/autoaurrepo.json
 cp autoaurrepo.service autoaurrepo.timer $DESTDIR/usr/lib/systemd/system
