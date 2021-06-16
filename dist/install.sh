@@ -4,8 +4,8 @@ mkdir -p $DESTDIR/usr/bin
 mkdir -p $DESTDIR/etc
 mkdir -p $DESTDIR/usr/lib/systemd/system
 
-cp -r ../*[^dist][^pkgbuild][^.vscode]* $DESTDIR/opt/autoaurrepo
-rm $DESTDIR/opt/autoaurrepo/config.json
+cp -r ../* $DESTDIR/opt/autoaurrepo
+rm -rf $DESTDIR/opt/autoaurrepo/{config.json,.vscode,dist,pkgbuild}
 
 cp autoaurrepo $DESTDIR/usr/bin
 
