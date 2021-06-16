@@ -2,5 +2,5 @@
 Description=autoaurrepo
 
 [Service]
-Type=oneshot
+Type=simple
 ExecStart=autoaurrepo
