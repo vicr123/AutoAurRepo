@@ -64,9 +64,9 @@ const url = require("url");
     }
 
     await Promise.all(config.repositories.map(repository => (async () => {
-        pkRepo = new PackageRepository(repository.name, repository.packageRepository);
+        let pkRepo = new PackageRepository(repository.name, repository.packageRepository);
         if (!await pkRepo.exists()) await pkRepo.init();
-    })));
+    })()));
 
     //Generate a pacman configuration file
     let pacmanSkel = await fs.readFile("pacman-skel.conf", {
