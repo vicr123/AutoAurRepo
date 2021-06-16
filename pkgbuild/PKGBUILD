@@ -10,6 +10,7 @@ depends=('git' 'nodejs')
 makedepends=('git' 'npm')
 source=("$pkgname-$pkgver"::"git+https://github.com/vicr123/autoaurrepo.git" "autoaurrepo.install")
 sha256sums=('SKIP' 'SKIP')
+backup=('etc/autoaurrepo.json')
 install="autoaurrepo.install"
 
 package() {
