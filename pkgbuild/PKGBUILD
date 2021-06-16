@@ -1,0 +1,17 @@
+# Maintainer: Victor Tran <vicr12345 at gmail dot com>
+pkgname=autoaurrepo
+pkgver=1.0
+pkgrel=0
+pkgdesc="Clock app"
+arch=("x86_64")
+url="https://github.com/vicr123/autoaurrepo"
+license=('GPL3')
+depends=('node')
+makedepends=('git' 'npm')
+source=("$pkgname-$pkgver"::"git+https://github.com/vicr123/autoaurrepo.git" "autoaurrepo.install")
+sha256sums=('SKIP' 'SKIP')
+
+package() {
+	cd "$pkgname-$pkgver/dist"
+	DESTDIR=$pkgdir ./install.sh
+}

@@ -1,0 +1,9 @@
+[Unit]
+Description=Automatic checks for AUR packages
+
+[Timer]
+OnCalendar=00/1
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,15 @@
+{
+    "chroot": "$HOME/aarchroot",
+    "pkgbuilds": "$HOME/pkgbuilds",
+    "repositories": [
+        {
+            "name": "testrepo",
+            "path": "",
+            "packageRepository": "$HOME/repositories/testrepo",
+            "packages": [
+                "the-libs",
+                "libtdesktopenvironment"
+            ]
+        }
+    ]
+}

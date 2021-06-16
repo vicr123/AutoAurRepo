@@ -1,0 +1,13 @@
+post_install() {
+    echo ":: Creating autoaur group"
+    groupadd autoaur
+
+    echo ":: Creating autoaur user"
+    useradd -rmg autoaur -G wheel -d /var/lib/autoaur -m -s /usr/bin/nologin autoaur
+    chmod g+rx /var/lib/autoaur
+}
+
+pre_remove() {
+    echo ":: Removing autoaur user"
+    userdel -r autoaur
+}

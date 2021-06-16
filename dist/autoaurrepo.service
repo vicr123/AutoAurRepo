@@ -1,0 +1,6 @@
+[Unit]
+Description=autoaurrepo
+
+[Service]
+Type=oneshot
+ExecStart=autoaurrepo
