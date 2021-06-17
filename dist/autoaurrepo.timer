@@ -2,7 +2,7 @@
 Description=Automatic checks for AUR packages
 
 [Timer]
-OnCalendar=00/1
+OnCalendar=00/1:00
 Persistent=true
 
 [Install]
