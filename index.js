@@ -106,6 +106,7 @@ const url = require("url");
             let pk = pkgbuilds.package(package);
             if (await pk.hasUpdate()) {
                 shouldBuild = true;
+                await pk.update();
             } else {
                 Log.info(`PKGBUILD ${package} has no updates.`);
             }
