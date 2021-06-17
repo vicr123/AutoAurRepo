@@ -26,7 +26,7 @@ class Package {
     }
 
     async update() {
-        await this.git.merge("origin/master");
+        await this.git.mergeFromTo("origin", "master");
     }
 
     async build(chroot) {
