@@ -38,7 +38,7 @@ class Chroot {
     }
 
     async updateChroot() {
-        await exec("arch-nspawn", [`${this.chrootPath}/root`, "pacman", "-Syu"]);
+        await exec("arch-nspawn", [`${this.chrootPath}/root`, "pacman", "-Syu", "--noconfirm"]);
     }
 }
 
