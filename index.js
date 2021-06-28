@@ -23,6 +23,7 @@ const PackageRepository = require("./packagerepository");
 const posix = require("posix");
 const fs = require("fs").promises;
 const url = require("url");
+const settings = require("./settings");
 
 (async() => {
     //Ensure that the autoaur user exists
@@ -93,9 +94,11 @@ const url = require("url");
         let pkRepo = new PackageRepository(repository.name, repository.packageRepository);
 
         for (let package of repository.packages) {
+            let failedPackages = settings.get("failed", []);
             let shouldBuild = false;
 
             if (opts.forceBuild?.includes(package) || opts.forceAll) shouldBuild = true;
+            if (failedPackages.includes(package)) shouldBuild = true;
 
             if (!await pkgbuilds.contains(package)) {
                 Log.info(`Obtaining PKGBUILD for new package ${package}.`);
@@ -125,10 +128,14 @@ const url = require("url");
                             Log.error(`Could not add package file ${file.name} to the database.`);
                         }
                     }
+                    
+                    if (failedPackages.includes(package)) failedPackages.splice(failedPackages.indexOf(package), 1);
                 } catch (error) {
                     Log.error(`Building PKGBUILD ${package} failed.`);
+                    if (!failedPackages.includes(package)) failedPackages.push(package);
                 } finally {
                     await pk.clean();
+                    settings.set("failed", failedPackages);
                     
                     if (opts.update) {
                         Log.info("Updating the chroot.");
