@@ -1,8 +1,8 @@
 # Maintainer: Victor Tran <vicr12345 at gmail dot com>
 pkgname=autoaurrepo
-pkgver=1.0
+pkgver=1.1
 pkgrel=0
-pkgdesc="Clock app"
+pkgdesc="Automatically build packages from the AUR"
 arch=("x86_64")
 url="https://github.com/vicr123/autoaurrepo"
 license=('GPL3')
