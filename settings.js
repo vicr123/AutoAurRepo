@@ -5,10 +5,7 @@ class Settings {
     settingsData;
 
     constructor() {
-        let filename = "config.json";
-        if (fs.existsSync("/etc/autoaurrepo.json")) filename = "/etc/autoaurrepo.json";
-
-        if (!fs.existsSync(this.settingsPath())) fs.mkdirSync(this.settingsPath(), {
+        if (!fs.existsSync(this.settingsDir())) fs.mkdirSync(this.settingsDir(), {
             recursive: true
         });
 
@@ -27,8 +24,12 @@ class Settings {
         fs.writeFileSync(this.settingsPath(), JSON.stringify(this.settingsData));
     }
 
+    settingsDir() {
+        return `${os.homedir}/.config/autoaurrepo`
+    }
+
     settingsPath() {
-        return `${os.homedir()}/.config/autoaurrepo`;
+        return `${this.settingsDir()}/settings.json`;
     }
 }
 
