@@ -9,9 +9,13 @@ class Settings {
             recursive: true
         });
 
-        this.settingsData = JSON.parse(fs.readFileSync(this.settingsPath(), {
-            encoding: "utf-8"
-        }));
+        if (fs.existsSync(this.settingsPath())) {
+            this.settingsData = JSON.parse(fs.readFileSync(this.settingsPath(), {
+                encoding: "utf-8"
+            }));
+        } else {
+            this.settingsData = {}
+        }
     }
 
     get(key, defaultValue) {
