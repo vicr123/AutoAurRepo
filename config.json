@@ -1,6 +1,7 @@
 {
     "chroot": "$HOME/aarchroot",
     "pkgbuilds": "$HOME/pkgbuilds",
+    "errorLogs": "$HOME/errors",
     "repositories": [
         {
             "name": "testrepo",

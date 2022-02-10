@@ -131,8 +131,21 @@ const settings = require("./settings");
                     
                     if (failedPackages.includes(package)) failedPackages.splice(failedPackages.indexOf(package), 1);
                 } catch (error) {
-                    Log.error(`Building PKGBUILD ${package} failed.`);
                     if (!failedPackages.includes(package)) failedPackages.push(package);
+
+                    if (error.stdout) {
+                        await fs.mkdir(config.errorLogs, {
+                            recursive: true
+                        });
+
+                        let fileName = `${new Date().getTime()}-${package}`;
+                        let path = `${config.errorLogs}/${fileName}`;
+                        fs.writeFile(path, error.stdout);
+                        
+                        Log.error(`Building PKGBUILD ${package} failed. Error log written to ${path}.`);
+                    } else {
+                        Log.error(`Building PKGBUILD ${package} failed.`);
+                    }
                 } finally {
                     await pk.clean();
                     settings.set("failed", failedPackages);
