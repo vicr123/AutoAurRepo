@@ -16,7 +16,6 @@ if (process.getuid() !== 0) {
     return;
 }
 
-const config = require("./config").configData;
 const Chroot = require("./chroot");
 const Pkgbuilds = require("./pkgbuilds");
 const PackageRepository = require("./packagerepository");
@@ -26,6 +25,8 @@ const url = require("url");
 const settings = require("./settings");
 
 (async() => {
+    const config = await require("./config").get();
+
     //Ensure that the autoaur user exists
     let autoauruser = await passwd.getpwnam("autoaur");
     if (!autoauruser) {
