@@ -1,5 +1,6 @@
 const fs = require('fs');
 const child = require("child_process");
+const passwd = require("./passwd");
 
 class Config {
     ready;
@@ -14,7 +15,7 @@ class Config {
             let filename = "config.json";
             if (fs.existsSync("/etc/autoaurrepo.json")) filename = "/etc/autoaurrepo.json";
 
-            let autoauruser = await posix.getpwnam("autoaur");
+            let autoauruser = await passwd.getpwnam("autoaur");
 
             this.configData = JSON.parse(child.execFileSync("/usr/bin/envsubst", {
                 input: fs.readFileSync(filename, {
