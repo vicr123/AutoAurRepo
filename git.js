@@ -1,5 +1,5 @@
 const simpleGit = require("simple-git");
-const passwd = require("passwd");
+const passwd = require("./passwd");
 
 class Git {
     static async clone(remote, baseDir, options) {

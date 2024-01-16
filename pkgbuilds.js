@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 const child = require("child_process");
 const Git = require("./git");
-const passwd = require("passwd");
+const passwd = require("./passwd");
 const util = require("util");
 
 const exec = util.promisify(child.execFile);

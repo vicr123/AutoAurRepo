@@ -19,7 +19,7 @@ if (process.getuid() !== 0) {
 const Chroot = require("./chroot");
 const Pkgbuilds = require("./pkgbuilds");
 const PackageRepository = require("./packagerepository");
-const passwd = require("passwd");
+const passwd = require("./passwd");
 const fs = require("fs").promises;
 const url = require("url");
 const settings = require("./settings");
