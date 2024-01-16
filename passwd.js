@@ -10,8 +10,8 @@ const getEntries =  async () => {
         return {
             name: parts[0],
             passwd: parts[1],
-            uid: parts[2],
-            gid: parts[3],
+            uid: parseInt(parts[2]),
+            gid: parseInt(parts[3]),
             gecos: parts[4],
             dir: parts[5],
             shell: parts[6]
