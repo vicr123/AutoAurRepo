@@ -10,7 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "commander": "^7.2.0",
-    "posix": "^4.2.0",
     "simple-git": "^3.15.1"
   }
 }

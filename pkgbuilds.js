@@ -1,20 +1,23 @@
 const fs = require('fs').promises;
 const child = require("child_process");
 const Git = require("./git");
-const posix = require("posix");
+const passwd = require("passwd");
 const util = require("util");
 
 const exec = util.promisify(child.execFile);
-
-const autoauruser = posix.getpwnam("autoaur");
 
 class Package {
     git;
     path;
 
     constructor(path) {
-        this.path = path;
-        this.git = Git.forDirectory(path);
+    }
+
+    static async forPath(path) {
+        const pk = new Package();
+        pk.path = path;
+        pk.git = await Git.forDirectory(path);
+        return pk;
     }
 
     async hasUpdate() {
@@ -54,6 +57,8 @@ class Pkgbuilds {
     }
 
     async init() {
+        const autoauruser = await passwd.getpwnam("autoaur");
+
         await fs.mkdir(this.pkgbuildsPath, {
             recursive: true
         });
@@ -72,8 +77,8 @@ class Pkgbuilds {
         await Git.clone(`https://aur.archlinux.org/${pkg}.git`, this.pkgbuildsPath);
     }
 
-    package(pkg) {
-        return new Package(`${this.pkgbuildsPath}/${pkg}`);
+    async package(pkg) {
+        return await Package.forPath(`${this.pkgbuildsPath}/${pkg}`);
     }
 }
 

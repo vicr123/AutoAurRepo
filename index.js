@@ -20,16 +20,15 @@ const config = require("./config").configData;
 const Chroot = require("./chroot");
 const Pkgbuilds = require("./pkgbuilds");
 const PackageRepository = require("./packagerepository");
-const posix = require("posix");
+const passwd = require("passwd");
 const fs = require("fs").promises;
 const url = require("url");
 const settings = require("./settings");
 
 (async() => {
     //Ensure that the autoaur user exists
-    try {
-        let autoauruser = posix.getpwnam("autoaur");
-    } catch {
+    let autoauruser = await passwd.getpwnam("autoaur");
+    if (!autoauruser) {
         Log.error("The autoaur user does not exist.");
         return;
     }
@@ -106,7 +105,7 @@ const settings = require("./settings");
                 shouldBuild = true;
             }
 
-            let pk = pkgbuilds.package(package);
+            let pk = await pkgbuilds.package(package);
             if (await pk.hasUpdate()) {
                 shouldBuild = true;
                 await pk.update();

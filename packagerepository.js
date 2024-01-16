@@ -1,11 +1,9 @@
 const fs = require('fs').promises;
 const child = require("child_process");
-const posix = require("posix");
+const passwd = require("./passwd");
 const util = require("util");
 
 const exec = util.promisify(child.execFile);
-
-const autoauruser = posix.getpwnam("autoaur");
 
 class PackageRepository {
     name;
@@ -25,6 +23,8 @@ class PackageRepository {
     }
 
     async init() {
+        const autoauruser = await passwd.getpwnam("autoaur");
+
         await fs.mkdir(this.path, {
             recursive: true
         });
@@ -38,6 +38,8 @@ class PackageRepository {
     }
 
     async addPackageFile(file) {
+        const autoauruser = await passwd.getpwnam("autoaur");
+
         await fs.copyFile(file.path, `${this.path}/${file.name}`);
         await exec("repo-add", [`${this.name}.db.tar.xz`, file.name], {
             cwd: this.path,

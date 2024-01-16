@@ -1,10 +1,10 @@
 const simpleGit = require("simple-git");
-const posix = require("posix");
-
-const autoauruser = posix.getpwnam("autoaur");
+const passwd = require("passwd");
 
 class Git {
     static async clone(remote, baseDir, options) {
+        const autoauruser = await passwd.getpwnam("autoaur");
+
         await (simpleGit(baseDir, {
             spawnOptions: {
                 uid: autoauruser.uid,
@@ -13,7 +13,9 @@ class Git {
         })).clone(remote, options);
     }
 
-    static forDirectory(baseDir) {
+    static async forDirectory(baseDir) {
+        const autoauruser = await passwd.getpwnam("autoaur");
+
         return simpleGit(baseDir, {
             spawnOptions: {
                 uid: autoauruser.uid,
